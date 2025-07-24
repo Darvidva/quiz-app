@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import CategoryCard from './CategoryCard'
+import PreQuizModal from './PreQuizModal'
 import science from '../../../assets/science.jpg'
 import General from '../../../assets/General Knowledge.jpg'
 import film from '../../../assets/film.jpg'
@@ -7,165 +10,151 @@ import history from '../../../assets/history.jpg'
 import art from '../../../assets/art.jpg'
 
 function QuizHome() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedDifficulty, setselectedDifficulty] = useState<{ [category: string]: string | null }>({})
+  
+  const handleStartQuiz = () => {
+  console.log("Start Quiz:", selectedCategory, selectedDifficulty)
+  setIsOpen(false)
+}
+
+
   return (
     <div>
         <h3 className="text-2xl md:text-3xl font-extrabold text-center leading-snug">
           Choose a Quiz Category
         </h3>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6 p-3'>
-          <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-xl cursor-pointer transition duration-300 w-full">
-            <img src={science} alt="Science" className="w-full h-40 md:h-40 object-cover rounded-md mb-4" />
-            <h2 className="text-xl text-center font-semibold text-gray-800">Science & Nature</h2>
-            <p className="text-sm text-gray-600 mt-2 text-center">Explore questions about physics, biology, and more.</p>
-            <div className="flex justify-center gap-2 mt-4">
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Easy
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Medium
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Hard
-              </span>
-            </div>
-              <button
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Start Quiz
-              </button>
-          </div>
+          <CategoryCard
+            image={science}
+            title="Science & Nature"
+            description="Explore questions about physics, biology, and more."
+            onStart={() => {
+              setSelectedCategory("Science & Nature")
+              setIsOpen(true)
+            }}
+            selectedDifficulty={selectedDifficulty["Science & Nature"] || null}
+            setSelectedDifficulty={(level) =>
+              setselectedDifficulty((prev) => ({
+                ...prev,
+                ["Science & Nature"]: level,
+              }))
+            }
+          />
 
-          <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-xl cursor-pointer transition duration-300 w-full p-6">
-            <img src={General} alt="General Knowledge" className="w-full h-40 object-cover rounded-md mb-4" />
-            <h2 className="text-xl text-center font-semibold text-gray-800">General Knowledge</h2>
-            <p className="text-sm text-gray-600 mt-2 text-center">Explore questions about physics, biology, and more.</p>
-            <div className="flex justify-center gap-2 mt-4">
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Easy
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Medium
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Hard
-              </span>
-            </div>
-              <button
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Start Quiz
-              </button>
-          </div>
+          <CategoryCard
+            image={General}
+            title="General Knowledge"
+            description="Test your knowledge on a wide range of topics."
+            onStart={() => {
+              setSelectedCategory("General Knowledge")
+              setIsOpen(true)
+            }}
+            selectedDifficulty={selectedDifficulty["General Knowledge"] || null}
+            setSelectedDifficulty={(level) =>
+              setselectedDifficulty((prev) => ({
+                ...prev,
+                ["General Knowledge"]: level,
+              }))
+            }
+          />
 
-          <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-xl cursor-pointer transition duration-300 w-full">
-            <img src={film} alt="Film" className="w-full h-40 object-cover rounded-md mb-4" />
-            <h2 className="text-xl text-center font-semibold text-gray-800">Entertainment: Film</h2>
-            <p className="text-sm text-gray-600 mt-2 text-center">Explore questions about physics, biology, and more.</p>
-            <div className="flex justify-center gap-2 mt-4">
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Easy
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Medium
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Hard
-              </span>
-            </div>
-              <button
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Start Quiz
-              </button>
-          </div>
 
-          <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-xl cursor-pointer transition duration-300 w-full">
-            <img src={sport} alt="Sport" className="w-full h-40 object-cover rounded-md mb-4" />
-            <h2 className="text-xl text-center font-semibold text-gray-800">Sports</h2>
-            <p className="text-sm text-gray-600 mt-2 text-center">Explore questions about physics, biology, and more.</p>
-            <div className="flex justify-center gap-2 mt-4">
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Easy
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Medium
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Hard
-              </span>
-            </div>
-              <button
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Start Quiz
-              </button>
-          </div>
+          <CategoryCard
+            image={sport}
+            title="Sports"
+            description="Test your knowledge on various sports and events."
+            onStart={() => {
+              setSelectedCategory("Sport")
+              setIsOpen(true)
+          }}
+          selectedDifficulty={selectedDifficulty["Sport"] || null}
+            setSelectedDifficulty={(level) =>
+              setselectedDifficulty((prev) => ({
+                ...prev,
+                ["Sport"]: level,
+              }))
+            }
+          />
 
-          <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-xl cursor-pointer transition duration-300 w-full">
-            <img src={history} alt="History" className="w-full h-40 object-cover rounded-md mb-4" />
-            <h2 className="text-xl text-center font-semibold text-gray-800">History</h2>
-            <p className="text-sm text-gray-600 mt-2 text-center">Explore questions about physics, biology, and more.</p>
-            <div className="flex justify-center gap-2 mt-4">
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Easy
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Medium
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Hard
-              </span>
-            </div>
-              <button
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Start Quiz
-              </button>
-          </div>
+          <CategoryCard
+            image={film}
+            title="Entertainment: Film"
+            description="Dive into the world of actors, iconic scenes, and movie trivia."
+            onStart={() => {
+              setSelectedCategory("Entertainment: Film");
+              setIsOpen(true);
+          }}
+          selectedDifficulty={selectedDifficulty["Entertainment: Film"] || null}
+            setSelectedDifficulty={(level) =>
+              setselectedDifficulty((prev) => ({
+                ...prev,
+                ["Entertainment: Film"]: level,
+              }))
+            }
+          />
 
-          <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-xl cursor-pointer transition duration-300 w-full">
-            <img src={geography} alt="Geography" className="w-full h-40 object-cover rounded-md mb-4" />
-            <h2 className="text-xl text-center font-semibold text-gray-800">Geography</h2>
-            <p className="text-sm text-gray-600 mt-2 text-center">Explore questions about physics, biology, and more.</p>
-            <div className="flex justify-center gap-2 mt-4">
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Easy
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Medium
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Hard
-              </span>
-            </div>
-              <button
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Start Quiz
-              </button>
-          </div>
+          <CategoryCard
+            image={history}
+            title="History"
+            description="Dive into questions about world events, ancient civilizations, revolutions, and famous leaders."
+            onStart={() => {
+              setSelectedCategory("History")
+              setIsOpen(true)
+          }}
+          selectedDifficulty={selectedDifficulty["History"] || null}
+            setSelectedDifficulty={(level) =>
+              setselectedDifficulty((prev) => ({
+                ...prev,
+                ["History"]: level,
+              }))
+            }
+          />
 
-          <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-xl cursor-pointer transition duration-300 w-full">
-            <img src={art} alt="art" className="w-full h-40 object-cover rounded-md mb-4" />
-            <h2 className="text-xl text-center font-semibold text-gray-800">Art</h2>
-            <p className="text-sm text-gray-600 mt-2 text-center">Explore questions about physics, biology, and more.</p>
-            <div className="flex justify-center gap-2 mt-4">
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Easy
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Medium
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-gray-200 text-gray-700 cursor-pointer hover:bg-blue-100">
-                Hard
-              </span>
-            </div>
-              <button
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Start Quiz
-              </button>
-          </div>
+         <CategoryCard
+          image={geography}
+          title="Geography"
+          description="Test your knowledge of countries, capitals, landmarks, maps, and global geography facts."
+          onStart={() => {
+              setSelectedCategory("Geography")
+              setIsOpen(true)
+          }}
+          selectedDifficulty={selectedDifficulty["Geography"] || null}
+            setSelectedDifficulty={(level) =>
+              setselectedDifficulty((prev) => ({
+                ...prev,
+                ["Geography"]: level,
+              }))
+            }
+          />
+
+        <CategoryCard
+          image={art}
+          title="Art"
+          description="Dive into questions about famous artists, art history, styles, and iconic works of art."
+          onStart={() => {
+              setSelectedCategory("Art")
+              setIsOpen(true)
+          }}
+          selectedDifficulty={selectedDifficulty["Art"] || null}
+            setSelectedDifficulty={(level) =>
+              setselectedDifficulty((prev) => ({
+                ...prev,
+                ["Art"]: level,
+              }))
+            }
+          />
+
+        <PreQuizModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          onConfirm={handleStartQuiz}
+          category={selectedCategory}
+          difficulty={selectedDifficulty[selectedCategory ?? ""] || null}
+
+        />
+
 
         </div>
     </div>

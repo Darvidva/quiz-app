@@ -3,7 +3,7 @@ import logo from '../assets/logo.png';
 import { useState } from 'react';
 
 function NavigationWrap() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <nav className="">
