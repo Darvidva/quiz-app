@@ -1,7 +1,9 @@
 import SplitText from '../ui/SplitText'
 import DecryptedText from '../ui/DecryptedText'
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+const navigate = useNavigate();
 
   return (
       <div className='flex flex-col items-center justify-center text-center min-h-screen px-4'>
@@ -42,7 +44,9 @@ function Home() {
         />
 
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full px-8 mt-8 transition duration-300 ease-in-out transform hover:scale-105">
+        <button 
+        onClick={() => navigate("/quiz")}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full px-8 mt-8 transition duration-300 ease-in-out transform hover:scale-105">
           Start Quiz
         </button>
 
