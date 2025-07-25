@@ -20,7 +20,8 @@ const PreQuizModal: React.FC<PreQuizModalProps> = ({
       <div className="bg-white p-6 rounded-md w-[90%] max-w-md">
         <h2 className="text-xl font-bold mb-4">Ready to start?</h2>
         <p className="mb-2">Category: <strong>{category}</strong></p>
-        <p className="mb-4">Difficulty: <strong>{difficulty}</strong></p>
+        <p className="mb-2">Difficulty: <strong>{difficulty}</strong></p>
+        <p className="mb-4">Time limit: <strong>5 minutes</strong></p>
 
         <div className="flex justify-end gap-2">
           <button onClick={onClose} className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">
@@ -32,7 +33,7 @@ const PreQuizModal: React.FC<PreQuizModalProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default PreQuizModal;

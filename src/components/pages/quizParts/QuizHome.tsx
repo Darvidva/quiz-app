@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CategoryCard from './CategoryCard'
 import PreQuizModal from './PreQuizModal'
+import QuizModal from './QuizModal'
 import science from '../../../assets/science.jpg'
 import General from '../../../assets/General Knowledge.jpg'
 import film from '../../../assets/film.jpg'
@@ -11,11 +12,13 @@ import art from '../../../assets/art.jpg'
 
 function QuizHome() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isQuizOpen, setIsQuizOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedDifficulty, setselectedDifficulty] = useState<{ [category: string]: string | null }>({})
   
   const handleStartQuiz = () => {
   console.log("Start Quiz:", selectedCategory, selectedDifficulty)
+  setIsQuizOpen(true)
   setIsOpen(false)
 }
 
@@ -152,9 +155,12 @@ function QuizHome() {
           onConfirm={handleStartQuiz}
           category={selectedCategory}
           difficulty={selectedDifficulty[selectedCategory ?? ""] || null}
-
         />
 
+        <QuizModal
+          isQuizOpen={isQuizOpen}
+          onClose={() => setIsQuizOpen(false)}
+        />
 
         </div>
     </div>
