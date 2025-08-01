@@ -15,9 +15,9 @@ function QuizHome() {
   const [isQuizOpen, setIsQuizOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedDifficulty, setselectedDifficulty] = useState<{ [category: string]: string | null }>({})
+
   
   const handleStartQuiz = () => {
-  console.log("Start Quiz:", selectedCategory, selectedDifficulty)
   setIsQuizOpen(true)
   setIsOpen(false)
 }
@@ -160,7 +160,10 @@ function QuizHome() {
         <QuizModal
           isQuizOpen={isQuizOpen}
           onClose={() => setIsQuizOpen(false)}
+          category={selectedCategory}
+          difficulty={selectedDifficulty[selectedCategory ?? ""] || null}
         />
+
 
         </div>
     </div>
